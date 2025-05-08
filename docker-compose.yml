@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: subscriptions-manager
+    image: subscriptions-manager
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/subscription_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - db
+
+  db:
+    container_name: subscription_db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: subscription_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "6433:5432"
+
+volumes:
+  db_data: {}

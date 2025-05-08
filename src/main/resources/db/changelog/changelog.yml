@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: A.Kalashnikov
+  - include:
+      file: /db/changelog/init.sql
